@@ -1,0 +1,54 @@
+---
+
+- name: Create directories
+  file:
+    path: '{{ bind9_log_dir }}'
+    state: directory
+    owner: bind
+    group: bind
+    mode: 0744
+
+- name: Copy bind9 config files
+  template:
+    src: '{{ item }}'
+    dest: '{{ bind9_conf_dir }}'
+    owner: bind
+    group: bind
+    mode: '0644'
+  with_fileglob:
+    - ../templates/conf/*
+  notify: reload bind
+
+- name: Create bind9 reverse zone files
+  include: zone.yml
+  with_items:
+    - '{{ localdns_zones }}'
+  loop_control:
+    loop_var: zone
+
+- name: Create bind9 zone file
+  template:
+    src: zone/local.zone
+    dest:  '{{ bind9_zone_dir }}/{{ localdns_domain }}.zone'
+    owner: bind
+    group: bind
+    mode: 0644
+  notify: reload bind
+
+- name: 'Update root NS list from {{ bind9_root_ns_url }}'
+  get_url:
+    url: '{{ bind9_root_ns_url }}'
+    dest: '{{ bind9_conf_dir }}/db.root'
+    owner: root
+    group: root
+    mode: 0644
+    force: true
+  notify: reload bind
+  ignore_errors: true
+
+- name: 'Start {{ bind9_pkg }} service'
+  systemd:
+    name: '{{ bind9_pkg }}'
+    state: started
+    enabled: true
+

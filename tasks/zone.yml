@@ -1,0 +1,13 @@
+---
+
+- name: "Create zone file {{ zone.router.split('.')[0:3] | reverse() | join('.') }}.zone"
+  template:
+    src: zone/rev.zone
+    dest: "{{ bind9_zone_dir }}/{{ zone.router.split('.')[0:3] | reverse() | join('.') }}.zone"
+    owner: bind
+    group: bind
+    mode: 0644
+  vars:
+    zone: '{{ zone }}'
+  notify: reload bind
+

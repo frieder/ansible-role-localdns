@@ -1,0 +1,22 @@
+// This file is managed by Ansible. Do not edit it manually.
+
+zone "example.lan" {
+    type master;
+    file "/var/cache/bind/example.lan.zone";
+};
+
+zone "0.0.10.in-addr.arpa" {
+    type master;
+    file "/var/cache/bind/0.0.10.zone";
+};
+zone "1.0.10.in-addr.arpa" {
+    type master;
+    file "/var/cache/bind/1.0.10.zone";
+};
+zone "2.0.10.in-addr.arpa" {
+    type master;
+    file "/var/cache/bind/2.0.10.zone";
+};
+
+include "/etc/bind/zones.rfc1918";
+

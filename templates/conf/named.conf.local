@@ -1,0 +1,16 @@
+// {{ ansible_managed }}
+
+zone "{{ localdns_domain }}" {
+    type master;
+    file "{{ bind9_zone_dir }}/{{ localdns_domain}}.zone";
+};
+
+{% for item in localdns_zones %}
+zone "{{ item.router.split('.')[0:3] | reverse() | join('.') }}.in-addr.arpa" {
+    type master;
+    file "{{ bind9_zone_dir }}/{{ item.router.split('.')[0:3] | reverse() | join('.') }}.zone";
+};
+{% endfor %}
+
+include "{{ bind9_conf_dir }}/zones.rfc1918";
+

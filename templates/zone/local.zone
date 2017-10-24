@@ -1,0 +1,22 @@
+; {{ ansible_managed }}
+
+$ORIGIN .
+
+$TTL                  600
+{{ localdns_domain }}         IN      SOA     dns.{{ localdns_domain }}. root.{{ localdns_domain }}. (
+                                          2017072501  ; serial
+                                          3600        ; slave check interval: 1 hour
+                                          900         ; if check fails retry after: 15 minutes
+                                          14400       ; if retry fails remove data older than: 4 hours
+                                          3600        ; minimum TTL to remember NXDOMAIN: 1 hour
+                                      )
+                      IN      NS      dns.{{ localdns_domain }}.
+                      IN      MX      10 smtp.{{ localdns_domain }}.
+
+$ORIGIN {{ localdns_domain }}.
+{% for zone in localdns_zones %}
+{% for entry in zone.entries %}
+{{ entry.host }}                     A       {{ entry.ip }}
+{% endfor %}
+{% endfor %}
+

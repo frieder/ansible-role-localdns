@@ -1,0 +1,26 @@
+---
+
+# Packages
+
+- name: Update apt cache
+  when: ansible_pkg_mgr == 'apt'
+  changed_when: false
+  apt:
+    update_cache: true
+    cache_valid_time: 7200
+    autoclean: true
+    autoremove: true
+
+- name: Install required packages
+  apt:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - '{{ bind9_pkg }}'
+    - '{{ isc_pkg }}'
+
+# Include bind9 & ISC tasks
+
+- include: bind9.yml
+- include: isc.yml
+

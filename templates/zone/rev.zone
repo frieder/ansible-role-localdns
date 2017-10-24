@@ -1,0 +1,19 @@
+; {{ ansible_managed }}
+
+$ORIGIN .
+$TTL 3600
+{{ zone.router.split('.')[0:3] | reverse() | join('.') }}.in-addr.arpa     IN      SOA     dns.{{ localdns_domain }}. root.{{ localdns_domain }}. (
+                                            2017101602
+                                            3600
+                                            900
+                                            14400
+                                            3600
+                                        )
+                                NS      dns.{{ localdns_domain }}.
+
+
+$ORIGIN {{ zone.router.split('.')[0:3] | reverse() | join('.') }}.in-addr.arpa.
+{% for entry in zone.entries %}
+{{ entry.ip.split('.')[3] }}        PTR        {{ entry.host }}.{{ localdns_domain }}.
+{% endfor %}
+

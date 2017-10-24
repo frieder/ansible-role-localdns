@@ -1,0 +1,45 @@
+// {{ ansible_managed }}
+
+acl internals {
+{% for item in bind9_acl_internals %}
+    {{ item }};
+{% endfor %}
+};
+
+options {
+    directory "{{ bind9_zone_dir }}";
+
+    forwarders {
+{% for item in bind9_forwarders %}
+        {{ item.ip }};  // {{ item.comment }}
+{% endfor %}
+    };
+
+    allow-query {
+        internals;
+    };
+
+    allow-query-cache {
+        internals;
+    };
+
+    recursion yes;
+
+    allow-recursion {
+        internals;
+    };
+
+    allow-transfer {
+        internals;
+    };
+
+    dnssec-validation auto;
+
+    auth-nxdomain no;   # conform to RFC1035
+
+    // no IPV6 on the local network
+    listen-on-v6 {
+        none;
+    };
+};
+

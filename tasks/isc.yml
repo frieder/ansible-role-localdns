@@ -1,0 +1,22 @@
+---
+
+# Config files
+
+- name: Create ISC config file
+  template:
+    src: isc/dhcpd.conf
+    dest: '{{ isc_conf_dir }}/dhcpd.conf'
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart isc
+  tags: isc
+
+# Service
+
+- name: 'Start {{ isc_pkg }} service'
+  systemd:
+    name: '{{ isc_pkg }}'
+    state: started
+    enabled: true
+

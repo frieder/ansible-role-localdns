@@ -1,0 +1,17 @@
+; This file is managed by Ansible. Do not edit it manually.
+
+$ORIGIN .
+$TTL 3600
+0.0.10.in-addr.arpa     IN      SOA     dns.example.lan. root.example.lan. (
+                                            2017101602
+                                            3600
+                                            900
+                                            14400
+                                            3600
+                                        )
+                                NS      dns.example.lan.
+
+
+$ORIGIN 0.0.10.in-addr.arpa.
+10        PTR        test1.example.lan.
+

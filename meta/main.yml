@@ -1,0 +1,24 @@
+---
+
+dependencies: []
+
+galaxy_info:
+  author: Frieder Heugel
+  description: Ansible role to install bind9 and isc-dhcp-server
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: Debian
+      versions:
+        - stretch
+  galaxy_tags:
+    - dns
+    - bind
+    - bind9
+    - dhcp
+    - isc
+    - isc-dhcp-server
+

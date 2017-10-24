@@ -1,0 +1,43 @@
+---
+
+- name: start bind
+  systemd:
+    name:     '{{ bind9_pkg }}'
+    state:    started
+
+
+- name: stop bind
+  systemd:
+    name:     '{{ bind9_pkg }}'
+    state:    stopped
+
+
+- name: restart bind
+  systemd:
+    name:     '{{ bind9_pkg }}'
+    state:    restarted
+
+
+- name: reload bind
+  systemd:
+    name:     '{{ bind9_pkg }}'
+    state:    reloaded
+
+
+- name: start isc
+  systemd:
+    name:   '{{ isc_pkg }}'
+    state:  started
+
+
+- name: stop isc
+  systemd:
+    name:   '{{ isc_pkg }}'
+    state:  stopped
+
+
+- name: restart isc
+  systemd:
+    name:   '{{ isc_pkg }}'
+    state:  restarted
+
