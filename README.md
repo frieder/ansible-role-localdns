@@ -117,5 +117,5 @@ Each zone can have multiple entries. Each entry defines the hostname, it's assig
 
 ### Example Output
 
-The files getting created by aboves playbook are available [here](https://github.com/frieder/ansible-role-localdns/example).
+The files getting created by aboves playbook are available [here](https://github.com/frieder/ansible-role-localdns/tree/master/example).
 
