@@ -79,40 +79,40 @@ Each zone can have multiple entries. Each entry defines the hostname, it's assig
 ```yaml
 - hosts: dns
   roles:
-     - role: frieder.localdns
-       localdns_domain: example.local
-       localdns_subnet: 255.255.0.0
-       localdns_dns: 10.0.0.3,10.0.1.2,10.0.2.2
-       localdns_ntp: '{{ localdns_dns }}'
-       localdns_dhcp_lease_def: 600
-       localdns_dhcp_lease_max: 7200
-       localdns_dhcp_ipforwarding: 'on'
-       localdns_zones:
-       - zone:
-         router: 10.0.0.1
-         entries:
-         - entry:
-           host: 'test1'
-           ip: 10.0.0.10
-           mac: 'B6:D5:87:4F:1C:32'
-       - zone:
-         router: 10.0.1.1
-         entries:
-         - entry:
-           host: 'test2'
-           ip: 10.0.1.10
-           mac: 'A6:C9:79:F2:61:FE'
-       - zone:
-         router: 10.0.2.1
-         subnet: 255.255.255.0
-         dns: 10.0.2.2
-         ntp: 10.0.2.2
-         ipforwarding: 'off'
-         entries:
-         - entry:
-           host: 'test3'
-           ip: 10.0.2.10
-           mac: '3E:DE:0E:12:F4:E2'
+  - role: frieder.localdns
+    localdns_domain: example.local
+    localdns_subnet: 255.255.0.0
+    localdns_dns: 10.0.0.3,10.0.1.2,10.0.2.2
+    localdns_ntp: '{{ localdns_dns }}'
+    localdns_dhcp_lease_def: 600
+    localdns_dhcp_lease_max: 7200
+    localdns_dhcp_ipforwarding: 'on'
+    localdns_zones:
+    - zone:
+      router: 10.0.0.1
+      entries:
+      - entry:
+        host: 'test1'
+        ip: 10.0.0.10
+        mac: 'B6:D5:87:4F:1C:32'
+    - zone:
+      router: 10.0.1.1
+      entries:
+      - entry:
+        host: 'test2'
+        ip: 10.0.1.10
+        mac: 'A6:C9:79:F2:61:FE'
+    - zone:
+      router: 10.0.2.1
+      subnet: 255.255.255.0
+      dns: 10.0.2.2
+      ntp: 10.0.2.2
+      ipforwarding: 'off'
+      entries:
+      - entry:
+        host: 'test3'
+        ip: 10.0.2.10
+        mac: '3E:DE:0E:12:F4:E2'
 ```
 
 ### Example Output
