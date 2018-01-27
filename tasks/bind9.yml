@@ -20,7 +20,7 @@
   notify: reload bind
 
 - name: Create bind9 reverse zone files
-  include: zone.yml
+  include_tasks: zone.yml
   with_items:
     - '{{ localdns_zones }}'
   loop_control:

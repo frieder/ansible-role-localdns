@@ -21,6 +21,6 @@
 
 # Include bind9 & ISC tasks
 
-- include: bind9.yml
-- include: isc.yml
+- import_tasks: bind9.yml
+- import_tasks: isc.yml
 

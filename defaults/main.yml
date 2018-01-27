@@ -5,7 +5,7 @@
 bind9_pkg: bind9
 bind9_conf_dir: /etc/bind
 bind9_zone_dir: /var/cache/bind
-bind9_log_dir:  /var/log/bind
+bind9_log_dir:  /var/log/named
 bind9_forwarders:
   - { ip : 213.186.33.99  , comment : OVH }
   - { ip : 8.8.8.8        , comment : Google }
